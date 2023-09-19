@@ -9,3 +9,4 @@ Bunch of stuff about semantic versioning
 - Even more things to do with semantic versioning
 
 Very cool! :thumbsup:
+:shrug:
