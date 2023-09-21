@@ -47,3 +47,21 @@ https://en.wikipedia.org/wiki/Shebang_(Unix)
 - https://www.gnupg.org/
 - https://www.liquidweb.com/kb/is-gpg-still-useful-in-todays-insecure-world/#:~:text=What%20Goal%20Does%20GPG%20Help,security%20against%20modification%20and%20tampering.
 - https://manpages.ubuntu.com/manpages/xenial/en/man1/gpg.1.html
+
+### AWS CLI Installation
+
+AWS CLI is installed for this project via a bash script [./bin/install_aws_cli](./bin/install_aws_cli)
+
+[Install or update the latest version of the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+
+### AWS CLI Env Vars
+
+[AWS CLI Env Vars](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html)
+
+Env Vars are stored in both the Gitpod Global Variables, as well as the individual Workspace env vars
+
+### AWS CLI - Check Credentials
+
+```
+aws sts get-caller-identity
+```
