@@ -65,3 +65,4 @@ Env Vars are stored in both the Gitpod Global Variables, as well as the individu
 ```
 aws sts get-caller-identity
 ```
+
