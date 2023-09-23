@@ -100,3 +100,19 @@ From the Terraform Cloud Login page:
 ```"Terraform Cloud runs Terraform operations and stores state remotely, so you can use Terraform without worrying about the stability of your local machine, or the security of your state file."```
 
 [Terraform Cloud Login](https://developer.hashicorp.com/terraform/tutorials/cloud-get-started/cloud-login)
+
+### Creating an alias for Terraform
+
+```
+open ~/.bash_profile
+```
+
+Place the below lines into the profile
+
+```
+alias tf=terraform
+```
+
+### Automating the alias to open be included in bash_profile every time you launch the editor
+
+need to add documentation here. Essentially create a file in ``/bin/`` to be referenced, with information about creating the alias. and then in the ``gitpod.yml``, we'll call out that directory where that file exists
