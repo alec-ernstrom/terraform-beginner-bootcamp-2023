@@ -66,3 +66,37 @@ Env Vars are stored in both the Gitpod Global Variables, as well as the individu
 aws sts get-caller-identity
 ```
 
+### Congfiguring main.tf Providers
+
+When you configure you're provider, you'll need to make sure you add lines for authentication:
+
+```
+provider "aws" {
+  region     = "us-west-2"
+  access_key = "my-access-key"
+  secret_key = "my-secret-key"
+}
+```
+*** ^^ THIS IS BAD - DON'T DO THIS**
+This method is insecure, because it involves placing your secure keys in clear-text within your configuration file, which is an obvious security concern.
+
+If you only have set your Access Keys in your Global Variables for your Workspace, it you won't be able to finish your init - because the provider config has nothing to reference. You have to specifically call our your env var's using **export**:
+
+```
+export AWS_ACCESS_KEY_ID="anaccesskey"
+export AWS_SECRET_ACCESS_KEY="asecretkey"
+export AWS_REGION="us-west-2"
+terraform plan
+```
+
+[Authentication and Configuration](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#authentication-and-configuration)
+
+### Terraform Cloud
+
+If you're using the Terraform Cloud block in your configuration file, you're telling your configuration environment to run IN the cloud, versus locally in your editor, so you need to remember to set environment variables IN the cloud GUI, so that environment can make use of them when referencing whatever API's it needs
+
+From the Terraform Cloud Login page:
+
+```"Terraform Cloud runs Terraform operations and stores state remotely, so you can use Terraform without worrying about the stability of your local machine, or the security of your state file."```
+
+[Terraform Cloud Login](https://developer.hashicorp.com/terraform/tutorials/cloud-get-started/cloud-login)
