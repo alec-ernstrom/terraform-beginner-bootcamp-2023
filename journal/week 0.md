@@ -1,18 +1,17 @@
 # Terraform Beginner Bootcamp 2023
 
-- [Terraform Beginner Bootcamp 2023](#terraform-beginner-bootcamp-2023)
-  * [Semantic Versioning](#semantic-versioning)
-  * [Install the Terraform CLI](#install-the-terraform-cli)
-    + [Considerations for Linux Distribution + OS Version](#considerations-for-linux-distribution---os-version)
-    + [Refactoring into Bash Scripts](#refactoring-into-bash-scripts)
-    + [Shebang](#shebang)
-    + [AWS CLI Installation](#aws-cli-installation)
-    + [AWS CLI Env Vars](#aws-cli-env-vars)
-    + [AWS CLI - Check Credentials](#aws-cli---check-credentials)
-    + [Congfiguring main.tf Providers](#congfiguring-maintf-providers)
-    + [Terraform Cloud](#terraform-cloud)
-    + [Creating an alias for Terraform](#creating-an-alias-for-terraform)
-    + [Automating the alias to open be included in bash_profile every time you launch the editor](#automating-the-alias-to-open-be-included-in-bash-profile-every-time-you-launch-the-editor)
+- [Semantic Versioning](#semantic-versioning)
+- [Install the Terraform CLI](#install-the-terraform-cli)
+ + [Considerations for Linux Distribution and OS Version](#considerations-for-linux-distribution-and-os-version)
+ + [Refactoring into Bash Scripts](#refactoring-into-bash-scripts)
+ + [Shebang](#shebang)
+- [AWS CLI Installation](#aws-cli-installation)
+  + [AWS CLI Env Vars](#aws-cli-env-vars)
+  + [AWS CLI - Check Credentials](#aws-cli---check-credentials)
+- [Congfiguring main.tf Providers](#congfiguring-maintf-providers)
+  + [Terraform Cloud](#terraform-cloud)
+  + [Creating an alias for Terraform](#creating-an-alias-for-terraform)
+  + [Storing the alias in the bash profile](#storing-the-alias-in-the-bash-profile)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
@@ -34,7 +33,7 @@ The Terraform installation instructions have changed due to gpg keyring changes.
 
 [Install Terraform CLI](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 
-### Considerations for Linux Distribution + OS Version
+### Considerations for Linux Distribution and OS Version
 
 This project is built using the Ubuntu distribution of Linux. If your project is anything other than Ubuntu, be aware that you may need to alter the scripts per your distribution. 
 
@@ -130,6 +129,6 @@ Place the below lines into the profile
 alias tf=terraform
 ```
 
-### Automating the alias to open be included in bash_profile every time you launch the editor
+### Storing the alias in the bash profile
 
 need to add documentation here. Essentially create a file in ``/bin/`` to be referenced, with information about creating the alias. and then in the ``gitpod.yml``, we'll call out that directory where that file exists
