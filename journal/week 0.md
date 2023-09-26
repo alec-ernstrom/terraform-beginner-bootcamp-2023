@@ -4,10 +4,11 @@
 - [Install the Terraform CLI](#install-the-terraform-cli)
   * [Considerations for Linux Distribution and OS Version](#considerations-for-linux-distribution-and-os-version)
   * [Refactoring into Bash Scripts](#refactoring-into-bash-scripts)
+  * [Setting Project Root Env Vars](#setting-project_root-env-var)
   * [Shebang](#shebang)
 - [AWS CLI Installation](#aws-cli-installation)
   * [AWS CLI Env Vars](#aws-cli-env-vars)
-  + [AWS CLI - Check Credentials](#aws-cli---check-credentials)
+  * [AWS CLI - Check Credentials](#aws-cli---check-credentials)
 - [Congfiguring main.tf Providers](#congfiguring-maintf-providers)
   * [Terraform Cloud](#terraform-cloud)
   * [Creating an alias for Terraform](#creating-an-alias-for-terraform)
@@ -45,9 +46,21 @@ The code provided for a Terraform CLI install is large, so it has been condensed
 Link to the Bash Script provided by Hashi: [./bin/install_terraform_cli](./bin/install_terraform_cli)
 
 
+### Setting $PROJECT_ROOT Env Var
+
+We can set a default location for working with our Terraform module after install into our terminal environment by placing the following code in our bash scripts:
+
+```sh
+PROJECT_ROOT='/workspace/terraform-beginner-bootcamp-2023'
+```
+
+This, coupled with a ```cd``` command will allow us to navigate to that location every time the bash script has finished initializing our terminal
+
+```sh
+cd '/workspace/terraform-beginner-bootcamp-2023'
+```
+
 ### Shebang
-
-
 
 https://en.wikipedia.org/wiki/Shebang_(Unix)
 
