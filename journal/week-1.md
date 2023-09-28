@@ -97,6 +97,80 @@ Using the source we can import he module from various place eg:
 - Github
 - Terraform Registry
 
+## Considerations with using LLM's
+
+It's important to remember that even though LLM's are helpful for generating code, their learning may have been based on outdated information, which could cause issues for you.
+
+## Working With Files In Terraform
+
+### Path Variable
+
+In Terraform, there is a special variable called `path` that allows us to reference local paths:
+
+- ``path.module`` = Get the path for the current module
+- ``path.root`` = Get the path for the root of the module
+
+Use these values carefully, because they include information about the context in which a configuration is being applied and so may inadvertently hurt the portability or composability of a module.
+
+For example, if you use ```path.cwd``` directly to populate a path into a resource argument then later applying the same configuration from a different directory or on a different computer with a different directory structure will cause the provider to consider the change of path to be a change to be applied, even if the path still refers to the same file.
+
+An example of this might look like:
+
+```sh
+resource "aws_s3_object" "error_html" {
+  bucket = aws_s3_bucket.website_bucket.bucket
+  key    = "error.html"
+  source = var.error_html_filepath
+
+  etag = filemd5(var.error_html_filepath)
+}
+```
+
+[References to Named Values](https://developer.hashicorp.com/terraform/language/expressions/references#filesystem-and-workspace-info)
+
+### "```fileexists```" Function
+
+fileexists determines whether a file exists at a given path.
+
+```sh
+fileexists(path)
+```
+
+Example of this might be:
+
+```sh
+condition = fileexists(var.error_html_filepath)
+```
+
+[fileexists Terraform Function](https://developer.hashicorp.com/terraform/language/functions/fileexists)
+
+
+### "```filemd5```" Function
+
+filemd5 is a variant of md5 that hashes the contents of a given file rather than a literal string.
+
+This is similar to ```md5(file(filename))```, but because file accepts only UTF-8 text it cannot be used to create hashes for binary files.
+
+Example of this might be something like:
+
+```sh
+etag = filemd5(var.error_html_filepath)
+```
+
+[filemd5 Terraform Function](https://developer.hashicorp.com/terraform/language/functions/filemd5)
+
+### "```etag```" Argument for "```aws_s3_object```"
+
+"(Optional) Triggers updates when the value changes. The only meaningful value is ```filemd5("path/to/file")```(Terraform 0.11.12 or later) or ```${md5(file("path/to/file"))}``` (Terraform 0.11.11 or earlier). This attribute is not compatible with KMS encryption, ```kms_key_id``` or ```server_side_encryption = "aws:kms"```, also if an object is larger than 16 MB, the AWS Management Console will upload or copy that object as a Multipart Upload, and therefore the ETag will not be an MD5 digest (see ```source_hash``` instead)."
+
+Example might be:
+
+```sh
+etag = filemd5(var.error_html_filepath)
+```
+
+[aws_s3_object "etag" Argument](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_object#etag)
+
 ## Other References
 
 [ToC Markdown Generator](https://ecotrust-canada.github.io/markdown-toc/)
