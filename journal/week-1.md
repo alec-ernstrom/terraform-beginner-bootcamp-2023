@@ -67,6 +67,37 @@ When using AWS, the ```import``` commands for the AWS provider can be found here
 
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#import
 
+## Fix Using Terraform Refresh 
+
+```sh
+terraform apply -refresh-only --auto-approve
+```
+
+## Terraform Modules
+
+It is recommended to place modules in a ```modules``` directory when locally developing modules, but this is not a hard and fast rule.
+
+### Passing Input Variables
+
+You'll put theses lines into your ```main.tf``` file for your project, to pass input variables into your module. The module has to declare the Terraform variables in its own ```variables.tf```.
+
+```tf
+module "terrahouse_aws" {
+  source = "./modules/terrahouse_aws"
+  user_uuid = var.user_uuid
+  bucket_name = var.bucket_name
+}
+```
+
+### Modules Sources
+
+Using the source we can import he module from various place eg:
+
+- Locally
+- Github
+- Terraform Registry
+
 ## Other References
 
 [ToC Markdown Generator](https://ecotrust-canada.github.io/markdown-toc/)
+
