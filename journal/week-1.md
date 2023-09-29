@@ -205,6 +205,16 @@ We used the ```jsonencode``` function to create the json policy inline in the HC
 
 [jsonencode](https://developer.hashicorp.com/terraform/language/functions/jsonencode)
 
+## Changing The Lifecycle of Resources
+
+[Meta-arguments - Lifecycle](https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle)
+
+## Terraform Data
+
+The terraform_data implements the standard resource lifecycle, but does not directly take any other actions. You can use the terraform_data resource without requiring or configuring a provider. It is always available through a built-in provider with the source address terraform.io/builtin/terraform.
+
+[terraform_data](https://developer.hashicorp.com/terraform/language/resources/terraform-data)
+
 ## Other References
 
 [ToC Markdown Generator](https://ecotrust-canada.github.io/markdown-toc/)
