@@ -171,7 +171,41 @@ etag = filemd5(var.error_html_filepath)
 
 [aws_s3_object "etag" Argument](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_object#etag)
 
+### Terraform Data Sources
+
+This allows us to source data from Cloud resources. This is useful when referencing cloud resources without needing to import them.
+
+```sh
+data "aws_caller_identity" "current" {}
+
+output "account_id" {
+  value = data.aws_caller_identity.current.account_id
+}
+```
+
+[Data Sources](https://developer.hashicorp.com/terraform/language/data-sources)
+
+### Terraform Locals
+
+A local value assigns a name to an expression, so you can use the name multiple times within a module instead of repeating the expression. They allow you to define local variables.
+
+Examples: 
+
+```sh
+locals {
+    s3_origin_id = "MyS3Origin"
+}
+```
+
+[Terraform Local Values](https://developer.hashicorp.com/terraform/language/values/locals)
+
+## ```jsonencode``` Function
+
+We used the ```jsonencode``` function to create the json policy inline in the HCL.
+
+[jsonencode](https://developer.hashicorp.com/terraform/language/functions/jsonencode)
+
 ## Other References
 
 [ToC Markdown Generator](https://ecotrust-canada.github.io/markdown-toc/)
-
+[AWS Caller Identity](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity)
