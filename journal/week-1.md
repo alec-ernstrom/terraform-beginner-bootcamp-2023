@@ -270,8 +270,18 @@ resource "aws_instance" "web" {
   }
 }
 ```
-
 [remote-exec](https://developer.hashicorp.com/terraform/language/resources/provisioners/remote-exec)
+
+## For_Each Arguements
+
+By default, a resource block configures one real infrastructure object (and similarly, a module block includes a child module's contents into the configuration one time). However, sometimes you want to manage several similar objects (like a fixed pool of compute instances) without writing a separate block for each one. Terraform has two ways to do this: ```count``` and ```for_each```.
+
+```sh
+[for s in var.list : upper(s)]
+```
+
+[for_each meta-argument](https://developer.hashicorp.com/terraform/language/meta-arguments/for_each)
+
 
 ## Other References
 
