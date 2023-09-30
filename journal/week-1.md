@@ -215,6 +215,64 @@ The terraform_data implements the standard resource lifecycle, but does not dire
 
 [terraform_data](https://developer.hashicorp.com/terraform/language/resources/terraform-data)
 
+## Provisioners
+
+SEE FIRST: [Provisioners are a Last Resort!](https://developer.hashicorp.com/terraform/language/resources/provisioners/syntax#provisioners-are-a-last-resort)
+
+Provisioners use built-in and third-party software to install and configure the machine image after booting.
+
+Provisioners are not recommended for user because Configuration Management tools like Ansible are better for this type of thing.
+
+[Provisioners](https://developer.hashicorp.com/packer/docs/provisioners)
+
+## Local Exec
+
+The local-exec provisioner invokes a local executable after a resource is created. This invokes a process on the machine running Terraform, not on the resource. See the ```remote-exec``` provisioner to run commands on the resource.
+
+An example might be:
+
+```sh
+resource "aws_instance" "web" {
+  # ...
+  
+  provisioner "local-exec" {
+    command = "echo The server's IP address is ${self.private_ip}"
+  }
+}
+```
+
+[local-exec](https://developer.hashicorp.com/terraform/language/resources/provisioners/local-exec)
+
+## Remote Exec
+
+The ```remote-exec``` provisioner invokes a script on a remote resource after it is created. This can be used to run a configuration management tool, bootstrap into a cluster, etc. To invoke a local process, see the ```local-exec``` provisioner instead. The ```remote-exec``` provisioner requires a connection and supports both ssh and winrm.
+
+Example:
+
+```sh
+resource "aws_instance" "web" {
+  # ...
+
+  # Establishes connection to be used by all
+  # generic remote provisioners (i.e. file/remote-exec)
+  connection {
+    type     = "ssh"
+    user     = "root"
+    password = var.root_password
+    host     = self.public_ip
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "puppet apply",
+      "consul join ${aws_instance.web.private_ip}",
+    ]
+  }
+}
+```
+
+[remote-exec](https://developer.hashicorp.com/terraform/language/resources/provisioners/remote-exec)
+
 ## Other References
 
 [ToC Markdown Generator](https://ecotrust-canada.github.io/markdown-toc/)
