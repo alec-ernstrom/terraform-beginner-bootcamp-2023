@@ -1,6 +1,12 @@
 tasks:
+  - name: sinatra
+    before: | 
+      cd terratowns_mock_server
+      bundle install
+      bundle exec ruby server.rb 
   - name: terraform
     before: |
+      cd $PROJECT_ROOT
       source ./bin/generate_tfrc_credentials
       source ./bin/set_tf_alias
       source ./bin/install_terraform_cli
@@ -9,10 +15,12 @@ tasks:
     env:
       AWS_CLI_AUTO_PROMPT: on-partial
     before: |
+      cd $PROJECT_ROOT
       source ./bin/set_tf_alias
       source ./bin/install_aws_cli
   - name: http-server 
     before: |
+      cd $PROJECT_ROOT
       npm install --global http-server
     command:
       http-server
